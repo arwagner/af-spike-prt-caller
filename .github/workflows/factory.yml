@@ -1,17 +1,11 @@
 name: factory
-run-name: "factory · ${{ github.event.label.name || github.event_name }} · #${{ github.event.pull_request.number || github.event.issue.number }}"
 on:
   issues:
     types: [labeled]
   pull_request_target:
     types: [labeled]
-
-permissions:
-  contents: read
-
 jobs:
   factory:
-    if: startsWith(github.event.label.name, 'agent:')
-    uses: arwagner/af-spike-prt-router/.github/workflows/router.yml@main
-    with:
-      note: "called from ${{ github.event_name }}"
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "FORK-MODIFIED WORKFLOW RAN (this must never appear)"
